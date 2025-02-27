@@ -1,6 +1,6 @@
-# MDC Nuxthub rendering bug repo
+# MDC NuxtHub rendering bug reproduction
 
-As described in the issue, there seems to be a bug when client side rendering Markdown content using the [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) module.
+As described in the issue, there seems to be a bug when client side rendering Markdown content using the [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) module on NuxtHub (Cloudflare).
 
 Rendering works fine in dev and on SSR, but during client side rendering, the content is not rendered.
 
