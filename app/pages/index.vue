@@ -3,27 +3,15 @@
 
 const url = shallowRef<'/api/md1' | '/api/md2'>('/api/md1')
 
-// Parse the markdown content
-const { data: rawMD } = useFetch(url)
+const rawMD = ref<string>((await $fetch(url.value)).md)
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const parsedMD = ref<any>(undefined)
-
-watchEffect(async () => {
-  if (rawMD.value) {
-    try {
-      const parsed = await parseMarkdown(rawMD.value.md)
-      parsedMD.value = parsed
-    }
-    catch (error) {
-      console.error(error)
-    }
-  }
-})
+const ast = ref(await parseMarkdown(rawMD.value))
 
 // Watch for errors during parsing
-function switchMD() {
+async function switchMD() {
   url.value = url.value === '/api/md1' ? '/api/md2' : '/api/md1'
+  rawMD.value = (await $fetch(url.value)).md
+  ast.value = await parseMarkdown(rawMD.value)
 }
 </script>
 
@@ -43,7 +31,7 @@ function switchMD() {
         <span>
           Using MDC to render markdown content
         </span>
-        <MDC v-if="rawMD" :value="rawMD.md" />
+        <MDC v-if="rawMD" :value="rawMD" />
       </div>
 
       <!-- Render markdown content using MDCRenderer component -->
@@ -51,7 +39,7 @@ function switchMD() {
         <span>
           Using MDCRenderer to render markdown content
         </span>
-        <MDCRenderer v-if="parsedMD" :body="parsedMD.body" :data="parsedMD.data" />
+        <MDCRenderer :body="ast.body" :data="ast.data" />
       </div>
 
       {{ rawMD }}
