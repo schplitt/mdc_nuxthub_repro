@@ -5,7 +5,11 @@ const url = shallowRef<'/api/md1' | '/api/md2'>('/api/md1')
 
 const rawMD = ref<string>((await $fetch(url.value)).md)
 
-const ast = ref(await parseMarkdown(rawMD.value))
+const { data: ast, error } = await useAsyncData('markdown', () => parseMarkdown(rawMD.value), { watch: [rawMD] })
+watchEffect(() => {
+  if (error.value)
+    console.error(error.value)
+})
 
 // Watch for errors during parsing
 async function switchMD() {
@@ -39,7 +43,7 @@ async function switchMD() {
         <span>
           Using MDCRenderer to render markdown content
         </span>
-        <MDCRenderer :body="ast.body" :data="ast.data" />
+        <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" />
       </div>
 
       {{ rawMD }}
