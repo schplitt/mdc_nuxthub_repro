@@ -1,5 +1,6 @@
 export default defineEventHandler(async (_event) => {
-  return `
+  return {
+    md: `
 # This is another random markdown file
 
 ## With some other content
@@ -7,5 +8,5 @@ export default defineEventHandler(async (_event) => {
 - [ ] Item 1
 - [ ] Item 2
 - [x] Item 3
-`
+` }
 })

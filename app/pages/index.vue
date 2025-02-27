@@ -6,22 +6,18 @@ const url = shallowRef<'/api/md1' | '/api/md2'>('/api/md1')
 // Parse the markdown content
 const { data: rawMD } = useFetch(url)
 
-const { data: ast, error: parseError } = useAsyncData('markdown', () => {
-  console.log('Parsing markdown content')
-  return parseMarkdown(rawMD.value ?? '')
-}, {
-  watch: [rawMD],
-})
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const parsedMD = ref<any>(undefined)
 
-watchEffect(() => {
-  if (ast.value) {
-    console.log('Parsed ast', ast.value)
-  }
-})
-
-watchEffect(() => {
-  if (parseError.value) {
-    console.error(parseError.value)
+watchEffect(async () => {
+  if (rawMD.value) {
+    try {
+      const parsed = await parseMarkdown(rawMD.value.md)
+      parsedMD.value = parsed
+    }
+    catch (error) {
+      console.error(error)
+    }
   }
 })
 
@@ -47,17 +43,16 @@ function switchMD() {
         <span>
           Using MDC to render markdown content
         </span>
-        <MDC :value="rawMD ?? ''" tag="article" />
+        <MDC v-if="rawMD" :value="rawMD.md" />
       </div>
 
       <!-- Render markdown content using MDCRenderer component -->
-      <!-- <div class="mdc-renderer-section">
+      <div class="mdc-renderer-section">
         <span>
-          Using MDCRenderer to render markdown content with:
-          const { data: ast, error } = await useAsyncData('markdown', () => parseMarkdown('md'))
+          Using MDCRenderer to render markdown content
         </span>
-        <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" />
-      </div> -->
+        <MDCRenderer v-if="parsedMD" :body="parsedMD.body" :data="parsedMD.data" />
+      </div>
 
       {{ rawMD }}
     </div>
@@ -73,7 +68,7 @@ function switchMD() {
 
 .markdown-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
 
