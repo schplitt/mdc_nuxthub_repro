@@ -18,8 +18,8 @@ importers:
         specifier: ^0.8.11
         version: 0.8.11(db0@0.2.1)(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.34.2)(vite@6.0.7(@types/node@22.8.1)(jiti@2.4.2)(terser@5.34.1)(yaml@2.7.0))
       '@nuxtjs/mdc':
-        specifier: npm:@nuxtjs/mdc-edge@0.14.1-29012669.738defe
-        version: '@nuxtjs/mdc-edge@0.14.1-29012669.738defe(magicast@0.3.5)(webpack-sources@3.2.3)'
+        specifier: https://pkg.pr.new/@nuxtjs/mdc@344938b
+        version: https://pkg.pr.new/@nuxtjs/mdc@344938b(magicast@0.3.5)(webpack-sources@3.2.3)
       nuxt:
         specifier: ^3.15.1
         version: 3.15.1(@parcel/watcher@2.4.1)(@types/node@22.8.1)(db0@0.2.1)(encoding@0.1.13)(eslint@9.18.0(jiti@2.4.2))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.34.2)(terser@5.34.1)(typescript@5.7.3)(vite@6.0.7(@types/node@22.8.1)(jiti@2.4.2)(terser@5.34.1)(yaml@2.7.0))(vue-tsc@2.2.0(typescript@5.7.3))(webpack-sources@3.2.3)(yaml@2.7.0)
@@ -1188,8 +1188,9 @@ packages:
   '@nuxthub/core@0.8.11':
     resolution: {integrity: sha512-z+bXHiULXHKD6x9ZumCEjjuTsHKdoF3I34wqBNR0VwTVpUNs36NF80ddr+beX1siCoCYvDav+h2BYWusvIE6ew==}
 
-  '@nuxtjs/mdc-edge@0.14.1-29012669.738defe':
-    resolution: {integrity: sha512-a4assgw2E0oD904pXM4fJ3jPuzJ0+Fhv2gpgIwGnq/oytqJ8q9nMPc8FngYxPoFbDYWOJC0TI6jZ++BZD6Bfcg==}
+  '@nuxtjs/mdc@https://pkg.pr.new/@nuxtjs/mdc@344938b':
+    resolution: {tarball: https://pkg.pr.new/@nuxtjs/mdc@344938b}
+    version: 0.14.0
 
   '@parcel/watcher-android-arm64@2.4.1':
     resolution: {integrity: sha512-LOi/WTbbh3aTn2RYddrO8pnapixAziFl6SMxHM69r3tvdSm94JtCenaKgk1GRg5FJ5wpMCpHeW+7yqPlvZv7kg==}
@@ -7036,7 +7037,7 @@ snapshots:
       - uploadthing
       - vite
 
-  '@nuxtjs/mdc-edge@0.14.1-29012669.738defe(magicast@0.3.5)(webpack-sources@3.2.3)':
+  '@nuxtjs/mdc@https://pkg.pr.new/@nuxtjs/mdc@344938b(magicast@0.3.5)(webpack-sources@3.2.3)':
     dependencies:
       '@nuxt/kit': 3.15.4(magicast@0.3.5)
       '@shikijs/transformers': 3.1.0
